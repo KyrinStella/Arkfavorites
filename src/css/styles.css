@@ -1,6 +1,14 @@
+@font-face {
+  font-family: 'novecento';
+  src: url('../../Fonts/Novecento WideBold.otf');
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-family: 'Noto Sans SC', 'novecento', Arial, Helvetica, sans-serif;
+  font-size: 21px;
+  background-image: url('http://cdn.jsdelivr.net/gh/KyrinStella/Ark-images/Logo_Rhodes2.png');
+  background-size: 16.6667% auto;
+  background-color: #f2f2f2;
 }
 
 .container {
@@ -11,30 +19,32 @@ body {
 }
 
 .progress {
-  margin: 1em auto;
+  margin-bottom: 1em;
   width: 500px;
   display: none;
 }
 
 .progressbar {
   position: relative;
-  width: 492px;
+  width: 500px;
+  top: 2px;
   border: 1px solid black;
-  padding: 3px;
-  margin: 2px 0px;
+  background-color: white;
+  padding: 0px;
+  margin: 3px 0px;
 }
 
 .progresstext {
   position: absolute;
-  width: 492px;
-  margin: 3px 0px;
+  width: 500px;
+  margin: 2px 0px;
   text-align: center;
-  font-size: 0.7em;
+  font-size: 0.5em;
 }
 
 .progressfill {
-  height: 20px;
-  background-color: lightgreen;
+  height: 15px;
+  background-color: gold;
   width: 0%;
 }
 
@@ -43,15 +53,24 @@ body {
   display: grid;
   grid-template-columns: 120px 1fr 120px;
   grid-gap: 5px;
-  width: 420px;
+  width: 500px;
 }
 
 .button {
-  border: 1px solid black;
+  border-radius: 5px;
   text-align: center;
   padding: 10%;
   grid-column: 2 / 3;
   cursor: pointer;
+  background-color: darkred;
+  color: white;
+  box-shadow: 0 0.1em #565656;
+  text-shadow: 2px 1px black;
+}
+
+.button:active {
+  background-color: #456ab5;
+  transform: translateY(0.1em);
 }
 
 .starting.start.button {
@@ -112,7 +131,7 @@ body {
 
 .sorter > .image {
   width: 120px;
-  height: 180px;
+  height: 240px;
   margin: auto;
   grid-row: 1 / 7;
   cursor: pointer;
@@ -129,17 +148,15 @@ body {
   width: calc(100%-10px);
   text-align: center;
   font-size: 0.8em;
-  line-height: 1.5em;
+  line-height: 1em;
 }
 
 .sorter > .left {
   grid-column: 1 / 2;
-  border: 1px solid #000000;
 }
 
 .sorter > .right {
   grid-column: 3 / 4;
-  border: 1px solid #000000;
 }
 
 .options {
@@ -208,17 +225,17 @@ label:hover {
 }
 
 .result {
-  height: 15px;
+  height: 18px;
   margin-bottom: -1px;
   display: grid;
-  width: 211px;
+  width: 200px;
   grid-template-columns: repeat(2, 1fr);
   border: 1px solid #000;
   margin-right: 5px;
 }
 
 .result.image {
-  height: 175px;
+  height: 178px;
 }
 
 .result.image img {
@@ -236,8 +253,7 @@ label:hover {
 }
 
 .result > .left {
-  width: 35px;
-  padding: 1px 3px 1px 0.5em;
+  width: 70px;
   grid-column: 1 / 2;
   text-align: right;
 }
@@ -254,8 +270,7 @@ label:hover {
 }
 
 .result > .right {
-  width: 160px;
-  padding: 1px 0em 1px 0em;
+  width: 125px;
   grid-column: 2 / 3;
   border-left: 1px solid #000;
   text-align: center;

@@ -78,26 +78,26 @@ function init() {
     /** If sorting is in progress. */
     if (timestamp && !timeTaken && !loading && choices.length === battleNo - 1) {
       switch(ev.key) {
-        case 's': case '3':                   saveProgress('Progress'); break;
-        case 'h': case 'ArrowLeft':           pick('left'); break;
-        case 'l': case 'ArrowRight':          pick('right'); break;
-        case 'k': case '1': case 'ArrowUp':   pick('tie'); break;
-        case 'j': case '2': case 'ArrowDown': undo(); break;
+        case 'p':							  saveProgress('Progress'); break;
+        case 'a': case 'ArrowLeft':           pick('left'); break;
+        case 'd': case 'ArrowRight':          pick('right'); break;
+        case 'w': case 'ArrowUp':			  pick('tie'); break;
+        case 's': case 'ArrowDown':			  undo(); break;
         default: break;
       }
     }
     /** If sorting has ended. */
     else if (timeTaken && choices.length === battleNo - 1) {
       switch(ev.key) {
-        case 'k': case '1': saveProgress('Last Result'); break;
-        case 'j': case '2': generateImage(); break;
-        case 's': case '3': generateTextList(); break;
+        case 'f': saveProgress('Last Result'); break;
+        case 'g': generateImage(); break;
+        case 'h': generateTextList(); break;
         default: break;
       }
     } else { // If sorting hasn't started yet.
       switch(ev.key) {
-        case '1': case 's': case 'Enter': start(); break;
-        case '2': case 'l':               loadProgress(); break;
+        case 'Enter': start(); break;
+        case 'o':               loadProgress(); break;
         default: break;
       }
     }
@@ -106,7 +106,7 @@ function init() {
   document.querySelector('.image.selector').insertAdjacentElement('beforeend', document.createElement('select'));
 
   /** Initialize image quantity selector for results. */
-  for (let i = 0; i <= 10; i++) {
+  for (let i = 0; i <= 20; i++) {
     const select = document.createElement('option');
     select.value = i;
     select.text = i;
@@ -121,7 +121,6 @@ function init() {
 
   /** Show load button if save data exists. */
   if (storedSaveType) {
-    document.querySelector('.starting.load.button > span').insertAdjacentText('beforeend', storedSaveType);
     document.querySelectorAll('.starting.button').forEach(el => {
       el.style['grid-row'] = 'span 3';
       el.style.display = 'block';
@@ -194,7 +193,7 @@ function start() {
   });
 
   if (characterDataToSort.length < 2) {
-    alert('Cannot sort with less than two characters. Please reselect.');
+    alert('你选择的筛选范围少于2人，无法测试。请重新选择筛选范围。');
     return;
   }
 
@@ -287,7 +286,7 @@ function display() {
     return `<p title="${charTooltip}">${charName}</p>`;
   };
 
-  progressBar(`Battle No. ${battleNo}`, percent);
+  progressBar(`第 ${battleNo} 轮 - 选择你更喜欢的一方!`, percent);
 
   document.querySelector('.left.sort.image').src = leftChar.img;
   document.querySelector('.right.sort.image').src = rightChar.img;
@@ -424,7 +423,7 @@ function pick(sortType) {
   if (leftIndex < 0) {
     timeTaken = timeTaken || new Date().getTime() - timestamp;
 
-    progressBar(`Battle No. ${battleNo} - Completed!`, 100);
+    progressBar(`第 ${battleNo} 轮 - 测试结束!`, 100);
 
     result();
   } else {
@@ -478,8 +477,8 @@ function result(imageNum = 3) {
   document.querySelector('.options').style.display = 'none';
   document.querySelector('.info').style.display = 'none';
 
-  const header = '<div class="result head"><div class="left">Order</div><div class="right">Name</div></div>';
-  const timeStr = `This sorter was completed on ${new Date(timestamp + timeTaken).toString()} and took ${msToReadableTime(timeTaken)}. <a href="${location.protocol}//${sorterURL}">Do another sorter?</a>`;
+  const header = '<div class="result head"><div class="left">排名</div><div class="right">角色</div></div>';
+  const timeStr = `您历时 ${msToReadableTime(timeTaken)} 于 ${new Date(timestamp + timeTaken).toLocaleString()} 完成了此次测试。 <a href="${location.protocol}//${sorterURL}"><br>再来一次？</a>`;
   const imgRes = (char, num) => {
     const charName = reduceTextWidth(char.name, 'Arial 12px', 160);
     const charTooltip = char.name !== charName ? char.name : '';
@@ -558,8 +557,8 @@ function saveProgress(saveType) {
 
   if (saveType !== 'Autosave') {
     const saveURL = `${location.protocol}//${sorterURL}?${saveData}`;
-    const inProgressText = 'You may click Load Progress after this to resume, or use this URL.';
-    const finishedText = 'You may use this URL to share this result, or click Load Last Result to view it again.';
+    const inProgressText = '保存进度成功！下次进入网页时可点击“读取上次进度”继续当前进度测试。或使用下面的链接：';
+    const finishedText = '如需分享测试结果，请复制下面的链接。同时也可在下次进入网页时点击“读取上次进度”重新查看本次测试结果。';
 
     window.prompt(saveType === 'Last Result' ? finishedText : inProgressText, saveURL);
   }
@@ -599,12 +598,12 @@ function generateImage() {
 
     imgButton.removeEventListener('click', generateImage);
     imgButton.innerHTML = '';
-    imgButton.insertAdjacentHTML('beforeend', `<a href="${dataURL}" download="${filename}">Download Image</a><br><br>`);
+    imgButton.insertAdjacentHTML('beforeend', `<a href="${dataURL}" download="${filename}">下载图片</a><br><br>`);
 
-    resetButton.insertAdjacentText('beforeend', 'Reset');
+    resetButton.insertAdjacentText('beforeend', '返回');
     resetButton.addEventListener('click', (event) => {
       imgButton.addEventListener('click', generateImage);
-      imgButton.innerHTML = 'Generate Image';
+      imgButton.innerHTML = '生成测试结果图片';
       event.stopPropagation();
     });
     imgButton.insertAdjacentElement('beforeend', resetButton);
@@ -771,7 +770,7 @@ function preloadImages() {
     return new Promise((res, rej) => {
       const reader = new FileReader();
       reader.onload = ev => {
-        progressBar(`Loading Image ${++imagesLoaded}`, Math.floor(imagesLoaded * 100 / totalLength));
+        progressBar(`已加载 ${++imagesLoaded} 个角色`, Math.floor(imagesLoaded * 100 / totalLength));
         res(ev.target.result);
       };
       reader.onerror = rej;
@@ -802,13 +801,13 @@ function msToReadableTime (milliseconds) {
   const minutes = Math.floor(t / 60);
   t = t - (minutes * 60);
   const content = [];
-	if (years) content.push(years + " year" + (years > 1 ? "s" : ""));
-	if (months) content.push(months + " month" + (months > 1 ? "s" : ""));
-	if (days) content.push(days + " day" + (days > 1 ? "s" : ""));
-	if (hours) content.push(hours + " hour"  + (hours > 1 ? "s" : ""));
-	if (minutes) content.push(minutes + " minute" + (minutes > 1 ? "s" : ""));
-	if (t) content.push(t + " second" + (t > 1 ? "s" : ""));
-  return content.slice(0,3).join(', ');
+	if (years) content.push(years + "年");
+	if (months) content.push(months + "月");
+	if (days) content.push(days + "日");
+	if (hours) content.push(hours + "时");
+	if (minutes) content.push(minutes + "分");
+	if (t) content.push(t + "秒");
+  return content.slice(0,3).join('');
 }
 
 /**
