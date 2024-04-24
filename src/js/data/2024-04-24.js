@@ -1979,7 +1979,8 @@ dataSet[dataSetVersion].characterData = [
       job: ["ss"],
       faction: ["ldd"],
       place: ["wdly"],
-      race: ["skz"]
+      race: ["skz"],
+      alter: true
     }
   },
   {
