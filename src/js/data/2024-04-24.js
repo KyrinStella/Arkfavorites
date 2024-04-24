@@ -387,7 +387,7 @@ dataSet[dataSetVersion].characterData = [
       rarity: ["st6"],
       gender: ["F"],
       job: ["jw"],
-      faction: ["klmy"],
+      faction: ["xlg", "klmy"],
       place: ["ltny"],
       race: ["kpln"]
     }
@@ -399,7 +399,7 @@ dataSet[dataSetVersion].characterData = [
       rarity: ["st5"],
       gender: ["F"],
       job: ["jw"],
-      faction: ["wssxszzt"],
+      faction: ["wss", "wssxszzt"],
       place: ["wss"],
       race: ["wss"]
     }
@@ -606,7 +606,7 @@ dataSet[dataSetVersion].characterData = [
       rarity: ["st5"],
       gender: ["F"],
       job: ["xf"],
-      faction: ["glby", "xst"],
+      faction: ["xst"],
       place: ["xst"],
       race: ["lbl"]
     }
@@ -618,7 +618,7 @@ dataSet[dataSetVersion].characterData = [
       rarity: ["st5"],
       gender: ["M"],
       job: ["jw"],
-      faction: ["glby", "xst"],
+      faction: ["xst"],
       place: ["xst"],
       race: ["lbl"]
     }
@@ -2932,7 +2932,7 @@ dataSet[dataSetVersion].characterData = [
       rarity: ["st6"],
       gender: ["F"],
       job: ["jj"],
-      faction: ["glby", "xst"],
+      faction: ["xst"],
       place: ["lmbt"],
       race: ["fl"]
     }
@@ -2956,7 +2956,7 @@ dataSet[dataSetVersion].characterData = [
       rarity: ["st5"],
       gender: ["F"],
       job: ["yl"],
-      faction: ["glby", "xst"],
+      faction: ["xst"],
       place: ["xst"],
       race: ["lbl"]
     }
@@ -3784,7 +3784,7 @@ dataSet[dataSetVersion].characterData = [
     img: "Courier.png",
     opts: {
       rarity: ["st4"],
-      gender: ["F"],
+      gender: ["M"],
       job: ["xf"],
       faction: ["xlge", "klmy"],
       place: ["xlge"],
