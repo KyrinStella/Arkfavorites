@@ -933,7 +933,7 @@ dataSet[dataSetVersion].characterData = [
     }
   },
   {
-    name: "缄默德克萨斯",
+    name: "焰影苇草",
     img: "Reed_The_Flame_Shadow.png",
     opts: {
       rarity: ["st6"],
