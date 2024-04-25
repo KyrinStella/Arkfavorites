@@ -807,7 +807,7 @@ dataSet[dataSetVersion].characterData = [
     }
   },
   {
-    name: "U-Official<br>(尤里卡)",
+    name: "尤里卡",
     img: "U-Official.png",
     opts: {
       rarity: ["st1"],
@@ -1616,7 +1616,7 @@ dataSet[dataSetVersion].characterData = [
     }
   },
   {
-    name: "正义骑士号",
+    name: '"正义骑士号"',
     img: "Justice_Knight.png",
     opts: {
       rarity: ["st1"],
